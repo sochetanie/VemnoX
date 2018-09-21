@@ -1,5 +1,6 @@
 package springwork.test;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import springwork.dao.*;
@@ -15,35 +17,38 @@ import springwork.model.*;
 public class CreditCardsDAOTest {
 	
 	private CreditCardsDAO ccDAO;
-	private List<CreditCards> aLlCreditCards = new ArrayList<CreditCards>();
+	CreditCards cc, ccToCheck;
+	int ccID, lastAddedCC;
+	private List<CreditCards> allCreditCards = new ArrayList<CreditCards>();
+
+	
+	@Before
+	public void setUp() {
+		ccDAO = new CreditCardsDAO();
+		cc = new CreditCards(505, "Kumar Roy", "1234123412341234", "11/19", "23456", "235", 24);
+	}
 
 	@Test
 	public void addCreditCard() throws SQLException {
-		ccDAO = new CreditCardsDAO();
-		CreditCards creditCard = new CreditCards();
-		creditCard.setAmountAvailable(505);
-		creditCard.setCardHolder("Kumar Roy");
-		creditCard.setCardNumber("1234123412341234");
-		creditCard.setExpirationDate("11/19");
-		creditCard.setZipCode("23456");
-		creditCard.setCVV("235");
-		creditCard.setUserID(24);
-        int id = ccDAO.addCreditCard(creditCard);
-        assertEquals(1,id);
+		ccID = ccDAO.addCreditCard(cc);
+		allCreditCards = ccDAO.showALlCreditCards(24);
+		lastAddedCC = allCreditCards.get(allCreditCards.size()-1).getCreditCardID();
+		assertEquals(lastAddedCC, ccID);
     }
 	
 	
 	 @Test
 	    public void showALlCreditCards() throws SQLException {
 		 ccDAO = new CreditCardsDAO();
-		 aLlCreditCards = ccDAO.showALlCreditCards(20);
-	     assertEquals(1,aLlCreditCards.size());
+		 allCreditCards = ccDAO.showALlCreditCards(20);
+	     assertEquals(1,allCreditCards.size());
 	    }
 	 
 	 @Test
 	 	public void deleteCreditCard() throws SQLException {
-		 ccDAO = new CreditCardsDAO();
-		 int id  = ccDAO.deleteCreditCard(3020);
+		 allCreditCards = ccDAO.showALlCreditCards(24);
+		 lastAddedCC = allCreditCards.get(allCreditCards.size()-1).getCreditCardID();
+		 int id  = ccDAO.deleteCreditCard(lastAddedCC);
 	     assertEquals(1,id);
 	    }
 

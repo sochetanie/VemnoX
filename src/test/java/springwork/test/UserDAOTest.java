@@ -20,37 +20,27 @@ import org.junit.runners.MethodSorters;
 import springwork.dao.UserAccountDAO;
 import springwork.model.UserAccount;
 
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDAOTest {
 	UserAccountDAO uDAO;
 	UserAccount user, uToCheck;
-	int generatedId;
-	boolean willDelete;
-	int isUpDated;
+	int uID;
+	boolean isUpDated, willDelete;
 	
 	@Before
 	public void setUp() {
 		uDAO = new UserAccountDAO();
-		user = new UserAccount("Ivanka", "Trump", "ivanka.trump@gmail.com","imarichgirl666","3334567867");
+		user = new UserAccount("Tanjimul", "Bhuiyan", "TanjimulBhuiyan@gmail.com", "Bhuiyan@2018", "3475674747");
 	}
-
+	  
 	@Test
-	public void createUser() throws SQLException, ClassNotFoundException, IOException {
-		if(generatedId!=0) 
-			uDAO.removeUser(generatedId);
-		generatedId = uDAO.registerUser(user);
-		uToCheck = uDAO.findUserByID(generatedId);
-		assertEquals(uToCheck.getFirstName(), user.getFirstName());
-		assertEquals(uToCheck.getLastName(), user.getLastName());
-		assertEquals(uToCheck.getEmail(), user.getEmail());
-		assertEquals(uToCheck.getPassword(), user.getPassword()); 
-		assertEquals(uToCheck.getPhoneNumber(), user.getPhoneNumber()); 
+	public void registerUser() throws SQLException  {
+		uID = uDAO.registerUser(user);
+		uToCheck = uDAO.findUserByID(uID);
+        assertEquals(uToCheck.getUserID(), uID);
 	}
     
 	@Test
 	public void testBGetUserByGmail() throws SQLException {
-		if(generatedId==0) 
-			generatedId = uDAO.registerUser(user);
 		uToCheck = uDAO.getUserByEmail(user.getEmail(), user.getPassword());
 		assertEquals(user.getEmail(), uToCheck.getEmail());
 		assertEquals(user.getPassword(), uToCheck.getPassword());
@@ -58,11 +48,9 @@ public class UserDAOTest {
 
 	@Test
 	public void testCFindUserByID() throws SQLException {
-		if(generatedId==0) 
-			generatedId = uDAO.registerUser(user);
-		uToCheck = uDAO.findUserByID(generatedId);
+		uToCheck = uDAO.findUserByID(uID);
 		
-		assertEquals(uToCheck.getUserID(), is(generatedId));
+		assertEquals(uToCheck.getUserID(), is(uID));
 		assertEquals(uToCheck.getFirstName(), user.getFirstName());
 		assertEquals(uToCheck.getLastName(), user.getLastName());
 		assertEquals(uToCheck.getEmail(), user.getEmail());
@@ -74,8 +62,6 @@ public class UserDAOTest {
 	
 	@Test
 	public void testDFindUserByFirstNameAndLastName() throws SQLException {
-		if(generatedId==0) 
-			generatedId = uDAO.registerUser(user);
 		List<UserAccount> uToCheck = uDAO.findUserByFirstNameAndLastName("Ivanka Trump");
 		
 		assertThat(uToCheck, notNullValue());
@@ -89,12 +75,10 @@ public class UserDAOTest {
 	
 	@Test
 	public void testEUpdateUserInfo() throws SQLException, ClassNotFoundException, IOException {
-		if(generatedId==0) 
-			generatedId = uDAO.registerUser(user);
-	
-		uToCheck = uDAO.findUserByID(generatedId);
-		System.out.println("testUpdateUserInfo "+generatedId);
-		isUpDated = uDAO.updateUserInfo(uToCheck, generatedId);
+
+		uToCheck = uDAO.findUserByID(uID);
+		System.out.println("testUpdateUserInfo "+uID);
+//		isUpDated = uDAO.updateUserInfo(uToCheck, uID);
 
 		assertThat(uToCheck.getFirstName(), is("Ivankas"));
 		assertThat(uToCheck.getLastName(), is("Trumps"));
@@ -111,9 +95,9 @@ public class UserDAOTest {
 		UserAccount ur =  uDAO.getUserByEmail("ivanka.trump@gmail.com", "imarischgirl666");
 		   System.out.println("ur.getUserID() "+ur.getUserID());
 	   if(ur.getUserID() < 1) {
-		generatedId = uDAO.registerUser(user);
-	   System.out.println(generatedId);
-	      uDAO.removeUser(generatedId);
+		uID = uDAO.registerUser(user);
+	   System.out.println(uID);
+	      uDAO.removeUser(uID);
 	   }
 	   else {
 		   System.out.println("ur.getUserID() "+ur.getUserID());
