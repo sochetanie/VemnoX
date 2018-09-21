@@ -29,8 +29,7 @@ public class CreditCardsDAOTest {
 		creditCard.setCVV("235");
 		creditCard.setUserID(24);
         int id = ccDAO.addCreditCard(creditCard);
-        int result = creditCard.getCreditCardID();
-        assertEquals(result,id);
+        assertEquals(1,id);
     }
 	
 	
@@ -40,8 +39,12 @@ public class CreditCardsDAOTest {
 		 aLlCreditCards = ccDAO.showALlCreditCards(20);
 	     assertEquals(1,aLlCreditCards.size());
 	    }
-
-
-
+	 
+	 @Test
+	 	public void deleteCreditCard() throws SQLException {
+		 ccDAO = new CreditCardsDAO();
+		 int id  = ccDAO.deleteCreditCard(3020);
+	     assertEquals(1,id);
+	    }
 
 }

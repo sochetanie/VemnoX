@@ -20,7 +20,7 @@ import org.junit.runners.MethodSorters;
 import springwork.dao.UserAccountDAO;
 import springwork.model.UserAccount;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDAOTest {
 	UserAccountDAO uDAO;
 	UserAccount user, uToCheck;
@@ -35,7 +35,7 @@ public class UserDAOTest {
 	}
 
 	@Test
-	public void testASCreateUser() throws SQLException, ClassNotFoundException, IOException {
+	public void createUser() throws SQLException, ClassNotFoundException, IOException {
 		if(generatedId!=0) 
 			uDAO.removeUser(generatedId);
 		generatedId = uDAO.registerUser(user);
