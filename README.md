@@ -3,7 +3,7 @@ Payment application. Where you can Pay to your friends and family using an bank 
 
 Javav 8, Sring MVC, Maven, Tomcut, JSP, jUnit, Oracle, SQL, Bootstrap
 
-Short video - https://www.youtube.com/embed/XZlqkxXMN_A
+Short video - https://youtu.be/ehbsHXjYWYI
 
 User stories:
 
