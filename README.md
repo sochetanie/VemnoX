@@ -1,5 +1,5 @@
 # VemnoX
-Payment application. Where you can Pay to your friends and family using an bank account or debit card.
+Payment application. Where you can Pay to your friends and family using an bank account or debit/credit card.
 
       Java 8, Spring MVC, Maven, Tomcat, JSP, jUnit, Oracle dba, SQL, Bootstrap
 
