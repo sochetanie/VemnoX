@@ -1,7 +1,7 @@
 # VemnoX
 Payment application. Where you can Pay to your friends and family using an bank account or debit card.
 
-Javav 8, Sring MVC, Maven, Tomcut, JSP, jUnit, Oracle, SQL, Bootstrap
+Javav 8, Sring MVC, Maven, Tomcat, JSP, jUnit, Oracle, SQL, Bootstrap
 
 Short video - https://youtu.be/ldP2zAPKyKI
 
