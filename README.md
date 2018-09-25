@@ -4,7 +4,7 @@ Payment application. Where you can Pay to your friends and family using an bank 
       Java 8, Spring MVC, Maven, Tomcat, JSP, jUnit, Oracle dba, SQL, Bootstrap
 
 
-  Short video - https://youtu.be/ldP2zAPKyKI
+  Short video - https://youtu.be/RdNEJA_oKa4
 
 
 User stories:
